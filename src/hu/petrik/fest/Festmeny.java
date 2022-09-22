@@ -35,6 +35,10 @@ public class Festmeny {
         return lastBid;
     }
 
+    public int getHighestBid() {
+        return highestBid;
+    }
+
     public boolean isSold() {
         return sold;
     }
@@ -43,15 +47,15 @@ public class Festmeny {
         this.sold = sold;
     }
 
-    public void bid(){
-        if(sold == true){
+    public void bid() {
+        if (sold == true) {
             System.out.println("A festmény már elkelt");
-        }else {
-            if (highestBid == 0){
+        } else {
+            if (highestBid == 0) {
                 highestBid = 100;
                 numberOfBids++;
                 lastBid = LocalDateTime.now();
-            }else if(highestBid > 0){
+            } else if (highestBid > 0) {
                 highestBid *= 1.10;
                 numberOfBids++;
                 lastBid = LocalDateTime.now();
@@ -59,16 +63,16 @@ public class Festmeny {
         }
     }
 
-    public void bid(int amount){
-        if(sold == true){
+    public void bid(int amount) {
+        if (sold == true) {
             System.out.println("A festmény már elkelt");
-        }else {
-            if(amount < 10 ||amount > 100){
+        } else {
+            if (amount < 10 || amount > 100) {
                 System.out.println("Túl nagy vagy túl kevés a licit érték");
-            }else{
-                if(amount > highestBid){
+            } else {
+                if (amount + highestBid > highestBid) {
                     String convert = String.valueOf(amount);
-                    highestBid = amount;
+                    highestBid += amount;
                     numberOfBids++;
                     lastBid = LocalDateTime.now();
                 }
@@ -78,6 +82,6 @@ public class Festmeny {
 
     @Override
     public String toString() {
-        return String.format("Festő: %s(%s)\n%b\nLegmagasabb licit: $%d(összesen: %d db)",painter,style,sold,highestBid,numberOfBids);
+        return String.format("Festő: %s(%s)\n%b\nLegmagasabb licit: $%d(összesen: %d db)", painter, style, sold, highestBid, numberOfBids);
     }
 }
