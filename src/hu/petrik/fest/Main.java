@@ -31,7 +31,9 @@ public class Main {
             fList.add(new Festmeny("Festmeny"+i,"Festo"+i,"Stilus"+i));
         }
 
-        
+        for (int i = 0; i < 20; i++) {
+            fList.get((int) Math.random()*fList.size()-1).bid((int)(Math.random()*100)+10);
+        }
 
     }
 }
