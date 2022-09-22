@@ -67,6 +67,7 @@ public class Festmeny {
                 System.out.println("Túl nagy vagy túl kevés a licit érték");
             }else{
                 if(amount > highestBid){
+                    String convert = String.valueOf(amount);
                     highestBid = amount;
                     numberOfBids++;
                     lastBid = LocalDateTime.now();
