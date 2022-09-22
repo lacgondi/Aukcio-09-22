@@ -3,6 +3,7 @@ package hu.petrik.fest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -65,6 +66,37 @@ public class Main {
             if (fList.get(i).getNumberOfBids() > 0) {
                 fList.get(i).setSold(true);
             }
+            System.out.println(fList.get(i));
+        }
+
+        System.out.println("3. feladat");
+        int max = -1;
+        int maxI=0;
+        for (int i = 0; i < fList.size(); i++) {
+            if (fList.get(i).getHighestBid()>max){
+                max = f1.getHighestBid();
+                maxI = i;
+            }
+        }
+        System.out.println("A legtöbb pénzért elkelt festmény "+fList.get(maxI));
+
+        for (int i = 0; i < fList.size(); i++) {
+            if(fList.get(i).getNumberOfBids()>10){
+                System.out.println("Van festmény amire 10-nél több alkalommal licitáltak");
+                break;
+            }
+        }
+
+        int notSold=0;
+        for (int i = 0; i < fList.size(); i++) {
+            if(fList.get(i).isSold()==false){
+                notSold++;
+            }
+        }
+        System.out.printf("%d olyan festmény van amit nem adtak el\n", notSold);
+
+        Collections.reverse(fList);
+        for (int i = 0; i < fList.size(); i++) {
             System.out.println(fList.get(i));
         }
 
