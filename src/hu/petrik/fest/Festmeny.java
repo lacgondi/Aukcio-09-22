@@ -7,7 +7,6 @@ public class Festmeny {
     private String painter;
     private String style;
     private int numberOfBids;
-
     private int highestBid;
     private LocalDateTime lastBid;
     private boolean sold;
@@ -16,6 +15,8 @@ public class Festmeny {
         this.title = title;
         this.painter = painter;
         this.style = style;
+        numberOfBids = 0;
+        highestBid = 0;
     }
 
     public String getPainter() {
@@ -43,15 +44,39 @@ public class Festmeny {
     }
 
     public void bid(){
-        numberOfBids++;
-        lastBid = LocalDateTime.now();
+        if(sold == true){
+            System.out.println("A festmény már elkelt");
+        }else {
+            if (highestBid == 0){
+                highestBid = 100;
+                numberOfBids++;
+                lastBid = LocalDateTime.now();
+            }else if(highestBid > 0){
+                highestBid *= 1.10;
+                numberOfBids++;
+                lastBid = LocalDateTime.now();
+            }
+        }
     }
 
     public void bid(int amount){
-        if(amount > highestBid){
-            highestBid = amount;
+        if(sold == true){
+            System.out.println("A festmény már elkelt");
+        }else {
+            if(amount < 10 ||amount > 100){
+                System.out.println("Túl nagy vagy túl kevés a licit érték");
+            }else{
+                if(amount > highestBid){
+                    highestBid = amount;
+                    numberOfBids++;
+                    lastBid = LocalDateTime.now();
+                }
+            }
         }
-        numberOfBids++;
-        lastBid = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Festő: %s(%s)\n%b\nLegmagasabb licit: $%d(összesen: %d db)",painter,style,sold,highestBid,numberOfBids);
     }
 }
